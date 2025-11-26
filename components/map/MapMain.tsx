@@ -69,7 +69,7 @@ export function MapMain() {
       <MapSearchBar onCountrySelect={handleCountrySelect} />
 
       {/* Top Bar - Always visible */}
-      <div className="absolute left-4 right-4 top-4 flex items-center gap-2 z-[1000] pointer-events-none">
+      <div className="absolute left-4 right-4 top-4 flex items-center gap-2 z-[1000]">
         {/* Spacer for search bar */}
         <div className="w-[360px]" />
 

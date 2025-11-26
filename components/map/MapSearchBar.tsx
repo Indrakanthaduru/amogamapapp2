@@ -147,7 +147,7 @@ export function MapSearchBar({ onCountrySelect }: MapSearchBarProps) {
     <div className="search-container absolute left-4 top-3 z-[1001]">
       {/* Search Box - always visible */}
       <div
-        className={`flex items-center gap-2 bg-white px-4 py-3.5 shadow-lg transition-all duration-100 ${
+        className={`flex items-center gap-2 bg-white px-4 py-3.5 shadow-lg transition-all duration-50 ${
           isExpanded ? "rounded-t-lg" : "rounded-full"
         }`}
         style={{ width: isExpanded ? "360px" : "auto" }}
@@ -160,7 +160,7 @@ export function MapSearchBar({ onCountrySelect }: MapSearchBarProps) {
           onChange={(e) => setSearchQuery(e.target.value)}
           onFocus={() => setIsExpanded(true)}
           onKeyDown={handleKeyDown}
-          className="border-none bg-transparent text-sm text-gray-700 outline-none placeholder:text-gray-500 transition-all duration-300 w-full"
+          className="border-none bg-transparent text-sm text-gray-800 font-semibold outline-none placeholder:text-gray-500 transition-all duration-300 w-full"
           aria-label="Search countries"
           aria-expanded={isExpanded}
           aria-controls="search-results"
