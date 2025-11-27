@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { LeafletMap } from "./LeafletMap";
 import { LeafletTileLayer } from "./LeafletTileLayer";
 import { LeafletGeoJSON } from "./LeafletGeoJSON";
@@ -8,11 +8,7 @@ import { MapSearchBar } from "./MapSearchBar";
 import { MapTopBar } from "./MapTopBar";
 import { MapLayersPanel } from "./MapLayersPanel";
 import { MapControls } from "./MapControls";
-import {
-  getTileProviderById,
-  getDefaultTileProvider,
-} from "@/constants/tile-providers";
-import { useTheme } from "@/hooks/useTheme";
+import { useMapTileProvider } from "@/hooks/useMapTileProvider";
 
 /**
  * MapMain - Main map component with theme-aware tile provider
@@ -20,24 +16,10 @@ import { useTheme } from "@/hooks/useTheme";
 export function MapMain() {
   const [selectedCountry, setSelectedCountry] =
     useState<GeoJSON.Feature | null>(null);
-  const [selectedTileProviderId, setSelectedTileProviderId] =
-    useState<string>("osm");
-  const { theme } = useTheme();
 
-  // Get tile provider based on manual selection or theme
-  const tileProvider = useMemo(() => {
-    // If user manually selected a provider, use that
-    if (selectedTileProviderId) {
-      return (
-        getTileProviderById(selectedTileProviderId) || getDefaultTileProvider()
-      );
-    }
-    // Otherwise, auto-switch based on theme
-    if (theme === "dark") {
-      return getTileProviderById("dark") || getDefaultTileProvider();
-    }
-    return getDefaultTileProvider();
-  }, [selectedTileProviderId, theme]);
+  // Use custom hook for theme-aware tile provider management
+  const { tileProvider, currentProviderId, setProviderId } =
+    useMapTileProvider();
 
   const handleCountrySelect = async (countryId: string) => {
     try {
@@ -79,8 +61,8 @@ export function MapMain() {
 
       {/* Layers Panel */}
       <MapLayersPanel
-        selectedProviderId={selectedTileProviderId}
-        onProviderChange={setSelectedTileProviderId}
+        selectedProviderId={currentProviderId}
+        onProviderChange={setProviderId}
       />
 
       {/* Map Controls */}

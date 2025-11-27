@@ -1,6 +1,6 @@
 "use client";
 
-import { Layers, Map, Satellite, Moon, MoreHorizontal } from "lucide-react";
+import { Map, Satellite, Moon, MoreHorizontal } from "lucide-react";
 import { useState } from "react";
 import { TILE_PROVIDERS } from "@/constants/tile-providers";
 
@@ -23,7 +23,7 @@ export function MapLayersPanel({
   const layerOptions = [
     {
       id: "osm",
-      label: "Map",
+      label: "Basic",
       icon: Map,
       preview: "from-blue-400 to-blue-600",
       provider: TILE_PROVIDERS.find((p) => p.id === "osm"),
@@ -68,15 +68,14 @@ export function MapLayersPanel({
           aria-label="Layer options"
         >
           <div
-            className={`h-12 w-14 bg-gradient-to-br ${selectedLayer.preview} flex items-center justify-center`}
+            className={`h-18 w-20 bg-gradient-to-br ${selectedLayer.preview} flex items-center justify-center`}
           >
             <selectedLayer.icon className="h-6 w-6 text-white" />
           </div>
+          <span className="rounded bg-white dark:bg-gray-800 px-2 text-xs font-medium text-gray-700 dark:text-gray-300">
+            {selectedLayer.label}
+          </span>
         </button>
-        <span className="rounded bg-white dark:bg-gray-800 px-2 py-0.5 text-xs font-medium text-gray-700 dark:text-gray-300 shadow">
-          <Layers className="inline h-3 w-3 mr-1" />
-          {selectedLayer.label}
-        </span>
       </div>
 
       {/* Slide-out Panel */}
@@ -87,7 +86,7 @@ export function MapLayersPanel({
             : "opacity-0 -translate-x-4 pointer-events-none"
         }`}
       >
-        <div className="flex items-center gap-2 bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-2 border border-gray-200 dark:border-gray-700">
+        <div className="flex items-center gap-2 bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-1 border border-gray-200 dark:border-gray-700">
           {layerOptions.map((layer) => (
             <button
               key={layer.id}
