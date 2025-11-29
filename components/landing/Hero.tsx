@@ -11,8 +11,8 @@ export function Hero() {
         </h1>
 
         <p className="text-lg sm:text-xl md:text-2xl text-white/80 max-w-2xl mx-auto">
-          Enterprise-grade boilerplate with vanilla Leaflet integration and
-          modern google maps style interface
+          Open-source starter kit that recreates the Google Maps experience
+          using Next.js and pure Leaflet.
         </p>
       </div>
     </div>

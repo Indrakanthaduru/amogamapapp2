@@ -10,7 +10,7 @@ export function NavigationButtons() {
       {/* Go to Map button */}
       <Link
         href="/map"
-        className="group flex w-64 items-center justify-between rounded-full bg-amber-600/80 pl-6 pr-2 py-2 text-sm font-semibold text-zinc-900 transition-colors hover:bg-chart-3"
+        className="group flex w-64 items-center justify-between rounded-full bg-amber-600/90 pl-6 pr-2 py-2 text-sm font-semibold text-zinc-900 transition-colors hover:bg-amber-600"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +37,7 @@ export function NavigationButtons() {
         href="https://github.com/yourusername/nextjs-leaflet-starter"
         target="_blank"
         rel="noopener noreferrer"
-        className="group flex w-64 items-center justify-between rounded-full bg-primary/70 pl-6 pr-2 py-2 text-sm font-semibold text-zinc-900 transition-colors hover:bg-primary"
+        className="group flex w-64 items-center justify-between rounded-full bg-white/70 pl-6 pr-2 py-2 text-sm font-semibold text-zinc-900 transition-colors hover:bg-white"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
