@@ -67,7 +67,7 @@ export function MapSearchBar({
         const response = await fetch(url);
         const data = await response.json();
         setCountries(data);
-      } catch (error) {
+      } catch {
         setCountries([]);
       } finally {
         setLoading(false);
@@ -209,7 +209,6 @@ export function MapSearchBar({
               onKeyDown={handleKeyDown}
               className="border-none bg-transparent text-sm text-gray-800 dark:text-gray-200 font-semibold outline-none placeholder:text-gray-500 dark:placeholder:text-gray-200 transition-all duration-300 w-full"
               aria-label="Search countries"
-              aria-expanded={isExpanded}
               aria-controls="search-results"
               aria-activedescendant={
                 selectedIndex >= 0 ? `country-${selectedIndex}` : undefined

@@ -5,6 +5,22 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Drawer } from "vaul";
 
+interface CountryInfo {
+  name?: {
+    official?: string;
+  };
+  region?: string;
+  subregion?: string;
+  capital?: string[];
+  population?: number;
+  area?: number;
+  currencies?: Record<string, { name: string }>;
+  languages?: Record<string, string>;
+  flags?: {
+    svg?: string;
+  };
+}
+
 interface MapDetailsPanelProps {
   country: GeoJSON.Feature | null;
   onClose: () => void;
@@ -17,7 +33,7 @@ interface MapDetailsPanelProps {
  */
 export function MapDetailsPanel({ country, onClose }: MapDetailsPanelProps) {
   const [isMobile, setIsMobile] = useState(false);
-  const [countryInfo, setCountryInfo] = useState<any>(null);
+  const [countryInfo, setCountryInfo] = useState<CountryInfo | null>(null);
   const snapPoints = [0.3, 0.6, 1];
   const [snap, setSnap] = useState<number | string | null>(snapPoints[0]);
 
@@ -181,7 +197,7 @@ export function MapDetailsPanel({ country, onClose }: MapDetailsPanelProps) {
                       Currency
                     </p>
                     <p className="font-medium">
-                      {(Object.values(countryInfo.currencies)[0] as any)?.name}
+                      {Object.values(countryInfo.currencies)[0]?.name}
                     </p>
                   </div>
                 )}
@@ -213,11 +229,13 @@ export function MapDetailsPanel({ country, onClose }: MapDetailsPanelProps) {
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
               Flag
             </h3>
-            <div className="relative rounded-lg overflow-hidden shadow-md border">
-              <img
+            <div className="relative rounded-lg overflow-hidden shadow-md border h-40">
+              <Image
                 src={countryInfo.flags.svg}
                 alt={`${countryName} flag`}
-                className="w-full h-40 object-cover"
+                fill
+                sizes="(max-width: 768px) 100vw, 384px"
+                className="object-cover"
               />
             </div>
           </div>

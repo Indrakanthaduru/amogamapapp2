@@ -114,7 +114,7 @@ export function calculateBoundsArea(bounds: LatLngBounds): number {
  * Validates: Requirements 12.4
  */
 
-import type { Map as LeafletMap, Marker, TileLayer, LatLng } from 'leaflet';
+import type { Map as LeafletMap, Marker, TileLayer } from 'leaflet';
 
 /**
  * Safely gets the current zoom level from a map instance

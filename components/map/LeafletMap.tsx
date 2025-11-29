@@ -51,6 +51,12 @@ export function LeafletMap({
       return;
     }
 
+    // Store config values in variables to avoid stale closures
+    const mapCenter = center;
+    const mapZoom = zoom;
+    const mapMinZoom = minZoom;
+    const mapMaxZoom = maxZoom;
+
     // Dynamically import Leaflet to avoid SSR issues
     import("leaflet")
       .then((L) => {
@@ -73,10 +79,10 @@ export function LeafletMap({
 
           // Initialize Leaflet map
           const map = L.map(containerRef.current, {
-            center,
-            zoom,
-            minZoom,
-            maxZoom,
+            center: mapCenter,
+            zoom: mapZoom,
+            minZoom: mapMinZoom,
+            maxZoom: mapMaxZoom,
             zoomControl: DEFAULT_MAP_CONFIG.zoomControl,
             attributionControl: DEFAULT_MAP_CONFIG.attributionControl,
           });
@@ -123,7 +129,7 @@ export function LeafletMap({
         }
       }
     };
-  }, []); // Empty dependency array - only initialize once
+  }, [center, zoom, minZoom, maxZoom, setMap]); // Include all dependencies
 
   return (
     <>

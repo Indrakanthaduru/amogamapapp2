@@ -1,7 +1,7 @@
 'use client';
 
 import { useTheme as useNextTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 /**
  * Hook to access theme from next-themes
@@ -23,12 +23,7 @@ import { useEffect, useState } from 'react';
  */
 export function useTheme() {
   const { theme, setTheme, systemTheme, resolvedTheme } = useNextTheme();
-  const [mounted, setMounted] = useState(false);
-
-  // Wait for component to mount to avoid hydration mismatch
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const [mounted] = useState(true);
 
   // Get the actual theme (resolve 'system' to actual theme)
   const currentTheme = resolvedTheme || (theme === 'system' ? systemTheme : theme);

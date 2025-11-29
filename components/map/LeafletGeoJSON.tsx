@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { useLeafletMap } from "@/hooks/useLeafletMap";
+import type { GeoJSON as GeoJSONType } from "leaflet";
 
 interface LeafletGeoJSONProps {
   data: GeoJSON.Feature | null;
@@ -24,7 +25,7 @@ interface LeafletGeoJSONProps {
  */
 export function LeafletGeoJSON({ data, style }: LeafletGeoJSONProps) {
   const map = useLeafletMap();
-  const layerRef = useRef<any>(null);
+  const layerRef = useRef<GeoJSONType | null>(null);
 
   useEffect(() => {
     if (!map || !data) return;

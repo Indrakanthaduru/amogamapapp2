@@ -2,7 +2,7 @@
  * Map-related TypeScript type definitions
  */
 
-import type { Map as LeafletMap, LatLngExpression, LatLngBoundsExpression } from 'leaflet';
+import type { Map as LeafletMap } from 'leaflet';
 
 /**
  * Map configuration options

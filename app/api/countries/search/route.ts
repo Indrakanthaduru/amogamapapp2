@@ -2,14 +2,25 @@ import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
-// Cache for the GeoJSON data (in-memory)
-let countriesCache: any = null;
-
 interface Country {
     id: string;
     name: string;
     nameLong: string;
 }
+
+interface GeoJSONFeature {
+    properties: {
+        NAME?: string;
+        NAME_LONG?: string;
+    };
+}
+
+interface GeoJSONData {
+    features: GeoJSONFeature[];
+}
+
+// Cache for the GeoJSON data (in-memory)
+let countriesCache: Country[] | null = null;
 
 /**
  * Load world.geojson and cache it in memory
@@ -23,17 +34,17 @@ function loadCountries(): Country[] {
     try {
         const filePath = path.join(process.cwd(), 'public', 'data', 'world.geojson');
         const fileContents = fs.readFileSync(filePath, 'utf8');
-        const geoJSON = JSON.parse(fileContents);
+        const geoJSON = JSON.parse(fileContents) as GeoJSONData;
 
         // Extract only essential data for search
-        countriesCache = geoJSON.features.map((feature: any, index: number) => ({
+        countriesCache = geoJSON.features.map((feature, index: number) => ({
             id: feature.properties.NAME || `country-${index}`,
             name: feature.properties.NAME || 'Unknown',
             nameLong: feature.properties.NAME_LONG || feature.properties.NAME || 'Unknown',
         })).filter((c: Country) => c.name !== 'Unknown'); // Filter out unknown countries
 
         return countriesCache;
-    } catch (error) {
+    } catch {
         return [];
     }
 }

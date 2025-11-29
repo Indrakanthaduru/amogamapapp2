@@ -2,8 +2,19 @@ import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
+interface GeoJSONFeature {
+  type: string;
+  properties: Record<string, unknown>;
+  geometry: Record<string, unknown>;
+}
+
+interface GeoJSONData {
+  type: string;
+  features: GeoJSONFeature[];
+}
+
 // Cache for full GeoJSON data
-let fullGeoJSONCache: any = null;
+let fullGeoJSONCache: GeoJSONData | null = null;
 
 /**
  * GET /api/countries/[id]
@@ -23,11 +34,11 @@ export async function GET(
         if (!fullGeoJSONCache) {
             const filePath = path.join(process.cwd(), 'public', 'data', 'world.geojson');
             const fileContents = fs.readFileSync(filePath, 'utf8');
-            fullGeoJSONCache = JSON.parse(fileContents);
+            fullGeoJSONCache = JSON.parse(fileContents) as GeoJSONData;
         }
 
         // Find country by ID (matches NAME or NAME_LONG)
-        const feature = fullGeoJSONCache.features.find((f: any) => {
+        const feature = fullGeoJSONCache?.features.find((f) => {
             const name = f.properties.NAME;
             const nameLong = f.properties.NAME_LONG;
             return name === decodedId || nameLong === decodedId;
@@ -41,7 +52,7 @@ export async function GET(
         }
 
         return NextResponse.json(feature);
-    } catch (error) {
+    } catch {
         return NextResponse.json(
             { error: 'Failed to load country data' },
             { status: 500 }

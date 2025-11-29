@@ -2,7 +2,7 @@
  * Default map configuration constants
  */
 
-import type { MapConfig } from '@/types';
+import type { MapConfig } from '@/types/map';
 
 /**
  * Default map configuration

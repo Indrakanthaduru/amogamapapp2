@@ -3,8 +3,6 @@
  * Validates: Requirements 12.2
  */
 
-import type { Coordinate } from '@/types/map';
-
 /**
  * Validates if a coordinate pair is within valid latitude/longitude bounds
  */
