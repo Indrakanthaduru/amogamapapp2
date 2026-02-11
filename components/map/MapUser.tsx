@@ -1,6 +1,6 @@
 "use client";
 
-import { User, Settings, LogOut, HelpCircle, Moon, Sun } from "lucide-react";
+import { User, Settings, LogOut, HelpCircle, Moon, Sun, Map } from "lucide-react";
 import { useRouter } from "next/navigation";
 import {
   DropdownMenu,
@@ -53,6 +53,13 @@ export function MapUser() {
           >
             <User className="mr-2 h-4 w-4" />
             <span>GitHub</span>
+          </a>
+        </DropdownMenuItem>
+        {/* New "My Maps" button */}
+        <DropdownMenuItem asChild>
+          <a href="/my-maps" className="flex items-center cursor-pointer">
+            <Map className="mr-2 h-4 w-4" />
+            <span>My Maps</span>
           </a>
         </DropdownMenuItem>
         <DropdownMenuItem
