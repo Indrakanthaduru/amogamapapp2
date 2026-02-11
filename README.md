@@ -155,7 +155,7 @@ npm run lint     # Run ESLint
 
 ## 🚢 Deploy to Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/(https://github.com/Indrakanthaduru/amogamapapp))
+[![Deploy with Vercel](https://vercel.com/button)](https://github.com/Indrakanthaduru/amogamapapp)
 
 ### Manual Deployment
 
